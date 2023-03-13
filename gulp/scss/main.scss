@@ -1,0 +1,176 @@
+@import 'vendor/normalize.scss';
+@import 'variables.scss';
+@import 'sections/aside.scss';
+@import 'sections/content.scss';
+@import 'sections/cards.scss';
+@import 'sections/info.scss';
+@import 'sections/mobile.scss';
+@import 'sections/popup.scss';
+
+
+@font-face {
+  font-weight: 400;
+  font-family: 'Gilroy';
+  src: url('assets/fonts/Gilroy-Medium.woff');
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: 'Gilroy';
+  src: url('assets/fonts/Gilroy-SemiBold.woff');
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: 'Gilroy';
+  src: url('assets/fonts/Gilroy-Bold.woff');
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: 'Inter';
+  src: url('assets/fonts/Inter-Regular.woff2');
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: 'SFCompactDisplay';
+  src: url('assets/fonts/SFCompactDisplay-Regular.woff2');
+}
+
+
+:root {
+  --bg-color-main: #F9F9F9;
+  --bg-color-aside: #FFFFFF;
+  --aside-title-color: #1E1E2D;
+  --aside-counter-bg: #E6E6E6;
+  --aside-login-color: #353542;
+  --aside-logout-color: #FB6B63;
+  --color-main: #1E1E2D;
+  --color-discover: #FFFFFF;
+  --color-icon-bg: #F5F5F5;
+  --color-card-bg: #FFFFFF;
+  --color-button-bg: #39C948;
+  --color-see-all: #55C960;
+  --color-button-text: #FFFFFF;
+  --color-button-second-bg: #EAF8EC;
+  --color-card-descr: #8C8D9A;
+  --color-button-second-text: #39C948;
+  --color-notification-bg: #FFFFFF;
+  --color-notification-info-bg: #FB6B63;
+  --color-popup-bg: #FFFFFF;
+  --color-login-icon-bg: #F5F5F5;
+  --color-menu-hover: #E1E1E1;
+  --color-theme-button: #FDB600;
+  --color-panel: #1E1E2D;
+  --color-creator-bg: #FBFBFB;
+  --color-creator-active: #FFFFFF;
+  --color-border-second: #FFFFFF;
+  --color-login-text: #1E1E2D;
+  --color-separator: #F2F2F2;
+  --color-separator-not: #E1E1E1;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-family: 'Gilroy', sans-serif;
+  background: var(--bg-color-main);
+
+  @media (max-width: $container-laptop) {
+    position: relative;
+  }
+}
+
+
+html {
+  overflow-x: hidden;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.dark-mode {
+  --bg-color-main: #1E1E2D;
+  --bg-color-aside: #161622;
+  --aside-title-color: #FFFFFF;
+  --aside-counter-bg: #2D2D38;
+  --aside-login-color: #A1A2AF;
+  --aside-logout-color: #FB493F;
+  --color-main: #FFFFFF;
+  --color-discover: #1E1E2D;
+  --color-icon-bg: #1E1E2D;
+  --color-card-bg: #161622;
+  --color-button-bg: #FFFFFF;
+  --color-see-all: #38C947;
+  --color-button-text: #1E1E2D;
+  --color-button-second-bg: #161622;
+  --color-card-descr: #A1A2AF;
+  --color-button-second-text: #FFFFFF;
+  --color-notification-bg: #161622;
+  --color-notification-info-bg: #A41412;
+  --color-popup-bg: #2A2A39;
+  --color-login-icon-bg: #2A2A36;
+  --color-menu-hover: #2A2A39;
+  --color-theme-button: #FFFFFF;
+  --color-panel: #858693;
+  --color-creator-bg: #161622;
+  --color-border-second: #373741;
+  --color-login-text: #FFFFFF;
+  --color-separator: #2D2D3E;
+  --color-separator-not: #60606D;
+}
+
+.container {
+  display: flex;
+  box-sizing: border-box;
+  width: $container-desk;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 50px 0 0;
+  background: var(--bg-color-main);
+
+  @media (max-width: $container-desk) {
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 13px 0 0;
+  }
+
+  @media (max-width: $container-laptop) {
+    flex-direction: column;
+    justify-content: baseline;
+    width: calc(655px + 20px + 20px);
+    padding: 0 20px;
+  }
+
+  @media (max-width: $container-tablet) {
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+
+a {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  padding: 0;
+}
