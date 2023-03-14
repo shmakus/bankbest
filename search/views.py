@@ -4,28 +4,30 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views import View
 # Create your views here.
 
-class ESearchView(View):
-    template_name = 'search/index.html'
+from django.shortcuts import render
+from core.models import Post
+from search.forms import SearchForm
 
-    def get(self, request, *args, **kwargs):
-        context = {}
 
-        question = request.GET.get('q')
-        if question is not None:
-            search_articles = Post.objects.filter(name__search=question)
+def search(request):
+    query = request.GET.get('query')
+    if query:
+        results = Post.objects.filter(name__icontains=query)
+        maincategorys = MainCategory.objects.all()
+        categories = Category.objects.all()
+        subcategories = SubCategory.objects.all()
+        posts = Post.objects.all()
+        banks = Bank.objects.all()
 
-            # формируем строку URL, которая будет содержать последний запрос
-            # Это важно для корректной работы пагинации
-            context['last_question'] = '?q=%s' % question
-
-            current_page = Paginator(search_articles, 10)
-
-            page = request.GET.get('page')
-            try:
-                context['article_lists'] = current_page.page(page)
-            except PageNotAnInteger:
-                context['article_lists'] = current_page.page(1)
-            except EmptyPage:
-                context['article_lists'] = current_page.page(current_page.num_pages)
-
-                return render(template_name = self.template_name, context=context)
+        context = {
+            'query': query,
+            'results': results,
+            'maincategorys': maincategorys,
+            'categories': categories,
+            'subcategories': subcategories,
+            'posts': posts,
+            'banks': banks,
+            'star_form': RatingForm
+        }
+        return render(request, 'search_results.html', context)
+    return render(request, 'base.html')

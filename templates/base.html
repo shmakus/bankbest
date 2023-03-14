@@ -176,13 +176,10 @@
                 fill="#A1A2AF"
               />
             </svg>
-                                <form action="{% url 'search:index' %}" class="navbar-form navbar-left" method="get">
+              <form method="GET" action="{% url 'search' %}">
+                <input type="text" name="query" placeholder="Search...">
+            </form>
 
-              <input id="search"  name="q" type="text" class="form-control" placeholder="Поиск">
-
-
-
-    </form>
           </div>
 
 

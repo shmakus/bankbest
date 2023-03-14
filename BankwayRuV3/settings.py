@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'graphene_django',
-    'search.apps.SearchConfig',
-    'django.contrib.postgres',
-    'bootstrap3',
+    'search',
+    'blog',
+
 ]
 
 MIDDLEWARE = [
