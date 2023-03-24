@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   togglePopup('info__notifications', 'info__notification-popup');
   togglePopup('info__login', 'info__login-popup');
   togglePopup('popup__button', 'popup__menu');
+  togglePopup('popup__button-custom', 'popup__menu-custom');
 
   function togglePopup(buttonClass, popupClass) {
     const buttonSelector = document.querySelector('.' + buttonClass);
@@ -19,16 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
         !$(popupSelector).is(e.target) &&
         $(popupSelector).has(e.target).length === 0
       ) {
-        buttonSelector.classList.remove(buttonClass + '--active');
-        popupSelector.classList.remove(popupClass + '--active');
       }
     });
 
     $(window).scroll(function () {
-      popupSelector.classList.remove(buttonClass + '--active');
-      buttonSelector.classList.remove(popupClass + '--active');
     });
   }
+
+  document.querySelector('#mobilePanel').addEventListener('click', (e) => {
+    e.preventDefault();
+    popupCustom.classList.add('popup--active');
+    document.querySelector('html').classList.add('no-scroll');
+  });
 
   const cardRatings = document.querySelectorAll('.cards__ratings');
   cardRatings.forEach((item) => {
@@ -41,13 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
         starsWrapper.setAttribute('data-total-value', 0);
       }
 
-      starsWrapper.classList.toggle('rating--active');
+      if (!starButton.classList.contains('cards__star-button--modal')) {
+        starsWrapper.classList.toggle('rating--active');
+      }
     });
 
     starsArr.forEach((star) => {
       star.addEventListener('click', () => {
         star.parentNode.dataset.totalValue = star.dataset.itemValue;
-        starsWrapper.classList.toggle('rating--active');
+        if (!starsWrapper.classList.contains('rating--modal')) {
+          starsWrapper.classList.toggle('rating--active');
+        }
       });
     });
   });
@@ -55,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const popupMainButton = document.querySelector('.mobile__user-button');
   const popups = document.querySelectorAll('.popup');
   const popupMain = document.querySelector('.popup--main');
+  const popupCustom = document.querySelector('.popup--custom');
 
   popupMainButton.addEventListener('click', () => {
     popupMain.classList.add('popup--active');
@@ -62,12 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   try {
-    const popupNotificationsButton = document.querySelector('.popup__notifications');
+    const popupNotificationsButtons= document.querySelectorAll('.popup__notifications');
     const popupNotifications = document.querySelector('.popup--notifications');
 
-    popupNotificationsButton.addEventListener('click', () => {
-      popupNotifications.classList.add('popup--active');
-      document.querySelector('html').classList.add('no-scroll');
+    popupNotificationsButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        popupNotifications.classList.add('popup--active');
+        document.querySelector('html').classList.add('no-scroll');
+      });
     });
   } catch {
     console.log('its a guest');
@@ -77,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cross = popup.querySelector('.popup__cross');
     cross.addEventListener('click', () => {
       popup.classList.remove('popup--active');
-      if (!popupMain.classList.contains('popup--active')) {
+      if (!popupMain.classList.contains('popup--active') && !popupCustom.classList.contains('popup--active')) {
         document.querySelector('html').classList.remove('no-scroll');
       }
     });
@@ -104,9 +114,13 @@ const enableDarkMode = () => {
   darkButtonMobile.classList.add('mobile__theme--active');
   lightButtonMobile.classList.remove('mobile__theme--active');
   document.body.classList.add('dark-mode');
-  document.querySelector('.content__discover').classList.add('content__discover--dark');
-  document.querySelector('.info__balance--light').classList.remove('info__balance--active');
-  document.querySelector('.info__balance--dark').classList.add('info__balance--active');
+
+  try {
+    document.querySelector('.content__discover').classList.add('content__discover--dark');
+  } catch {}
+  document.querySelectorAll('.modal__close').forEach((close) => {
+    close.classList.add('modal__close--dark');
+  });
   localStorage.setItem('dark-mode', 'enabled');
 };
 
@@ -116,9 +130,13 @@ const disableDarkMode = () => {
   darkButtonMobile.classList.remove('mobile__theme--active');
   lightButtonMobile.classList.add('mobile__theme--active');
   document.body.classList.remove('dark-mode');
-  document.querySelector('.content__discover').classList.remove('content__discover--dark');
-  document.querySelector('.info__balance--light').classList.add('info__balance--active');
-  document.querySelector('.info__balance--dark').classList.remove('info__balance--active');
+  try {
+    document.querySelector('.content__discover').classList.remove('content__discover--dark');
+  } catch {
+  }
+  document.querySelectorAll('.modal__close').forEach((close) => {
+    close.classList.remove('modal__close--dark');
+  });
   localStorage.setItem('dark-mode', 'disabled');
 };
 
@@ -140,9 +158,13 @@ const enableDarkModeMobile = () => {
   darkButtonMobile.classList.add('mobile__theme--active');
   lightButtonMobile.classList.remove('mobile__theme--active');
   document.body.classList.add('dark-mode');
-  document.querySelector('.content__discover').classList.add('content__discover--dark');
-  document.querySelector('.info__balance--light').classList.remove('info__balance--active');
-  document.querySelector('.info__balance--dark').classList.add('info__balance--active');
+  try {
+    document.querySelector('.content__discover').classList.add('content__discover--dark');
+  } catch {
+  }
+  document.querySelectorAll('.modal__close').forEach((close) => {
+    close.classList.add('modal__close--dark');
+  });
   localStorage.setItem('dark-mode', 'enabled');
 };
 
@@ -152,9 +174,16 @@ const disableDarkModeMobile = () => {
   darkButtonMobile.classList.remove('mobile__theme--active');
   lightButtonMobile.classList.add('mobile__theme--active');
   document.body.classList.remove('dark-mode');
-  document.querySelector('.content__discover').classList.remove('content__discover--dark');
+
+  try {
+    document.querySelector('.content__discover').classList.remove('content__discover--dark');
+  } catch {
+  }
   document.querySelector('.info__balance--light').classList.add('info__balance--active');
   document.querySelector('.info__balance--dark').classList.remove('info__balance--active');
+  document.querySelectorAll('.modal__close').forEach((close) => {
+    close.classList.remove('modal__close--dark');
+  });
   localStorage.setItem('dark-mode', 'disabled');
 };
 

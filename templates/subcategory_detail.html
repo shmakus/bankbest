@@ -1,56 +1,56 @@
-{% extends 'base.html' %}
+{% extends 'new_base2.html' %}
 {% load static %}
-
-{% block title %}{{ subcategory.title }}{% endblock title %}
+{% block title %} {{ subcategory.title }} {% endblock title %}
 {% block description %}{{ subcategory.description }}{% endblock description %}
 
+{% block mobile_menu %}
+        {% for mobile_menu in maincategorys %}
+          <li class="popup__nav-item">
+            <a href="{{ mobile_menu.get_absolute_url }}">
+              <span>{{ mobile_menu.name }}</span>
+            </a>
+          </li>
+        {% endfor %}
 
-{% block menu %}
-<div class="aside__container">
-  <ul class="aside__list">
-      {% for main in maincategorys %}
-    <li class="aside__item aside__item--active">
-      <a href="{{ main.get_absolute_url }}">
+{% endblock mobile_menu %}
+
+{% block desktop_menu %}
+    {% for main in maincategorys %}
+        <li class="aside__item aside__item--active">
+        <a href="{{ main.get_absolute_url }}">
         <span>{{ main.name }}</span>
-      </a>
-    </li>
-       {% endfor %}
-  </ul>
-</div>
-{% endblock menu %}
-
-
-{% block category %}
-<div class="content__filter">
-    <div class="content__info">
-      <h1>{{ subcategory.name }}</h1>
-
-    </div>
-    <ul class="content__tags">
-    {% for category in subcategories %}
-      <li class="content__tag content__tag--fire">
-        <a href="{{ category.get_absolute_url }}">
-          <div class="content__icon">
-            <img src="{{ category.icon.url }}" alt="" />
-          </div>
-          <span>{{ category.name }}</span>
         </a>
-      </li>
-{% endfor %}
-    </ul>
-</div>
-{% endblock category %}
+        </li>
+    {% endfor %}
+{% endblock desktop_menu %}
+{% block h1 %} {{ subcategory.name }} {% endblock h1 %}
 
-{% block post %}
+{% block product_cat %}
+    {% for prodect_cat in subcategories %}
+        <li class="content__tag content__tag--fire">
 
-<div class="content__cards">
-<ul class="cards">
-{% for post in posts %}
+
+
+    <a href="{{ prodect_cat.get_absolute_url }}">
+          <div class="content__icon">
+            <img src="{{ prodect_cat.icon.url }}" alt="" />
+          </div>
+    <span>{{ prodect_cat.name }}</span>
+    </a>
+        </li>
+    {% endfor %}
+{% endblock product_cat %}
+
+
+{% block cards_product %}
+    <div class="content__cards">
+    <ul class="cards">
+    {% for post in posts %}
   <li class="cards__card">
     <div class="cards__picture">
-      <img src="{{ post.img.url }}" alt="" />
+        <img src="{{ post.img.url }}" alt="" />
     </div>
-    <h3 class="cards__title">{{ post.name }}</h3>
+   <h3 class="cards__title">{{ post.name }}</h3>
     <div class="cards__reactions">
       <div class="cards__ratings">
         <div class="cards__star-button">
@@ -64,12 +64,9 @@
             />
           </svg>
         </div>
-        <div class="rating" data-total-value="0">
-          <div class="rating__item" data-item-value="4"></div>
-          <div class="rating__item" data-item-value="3"></div>
-          <div class="rating__item" data-item-value="2"></div>
-          <div class="rating__item" data-item-value="1"></div>
-        </div>
+          <div class="rating" data-total-value="0">
+
+                    </div>
       </div>
       <div class="cards__rate">
         <span>4.8</span>
@@ -112,59 +109,57 @@
           </defs>
         </svg>
       </div>
-      <a href="#" class="cards__reviews">Reviews (15)</a>
+      <a href="{{ post.get_absolute_url }}#reviews" class="cards__reviews">Отзывы</a>
     </div>
     <div class="cards__buttons">
-      <a href="{{ post.link }}" class="cards__button">Button Text</a>
-      <a href="{{ post.get_absolute_url }}" class="cards__button cards__button--second">Button Text</a>
+      <a href="{{ post.link }}" class="cards__button">Оформить</a>
+      <a href="{{ post.get_absolute_url }}" class="cards__button cards__button--second">Подробнее</a>
     </div>
     <p class="cards__descr">{{ post.description }}</p>
   </li>
-{% endfor %}
-</ul>
-</div>
-{% endblock post %}
+    {% endfor %}
+    </ul>
+          </div>
+{% endblock cards_product %}
 
-{% block right %}
-<div class="info__subscriptions">
-            <div class="info__headers">
-              <h3>Рейтинг карт</h3>
-              <a href="#">See all</a>
-            </div>
-            <ul class="info__creators">
-                {% for p in posts %}
-              <li class="info__creator info__creator--active">
-                <div class="info__icon">
-                  <img src="" alt="" />
-                </div>
-                <div class="info__descr">
-                  <h4>{{ p.name}}</h4>
-                  <a href="#">@Oschaf_1</a>
-                </div>
-                <a href="{{ p.get_absolute_url }}" class="info__button info__button--active">Открыть</a>
-              </li>
-                {% endfor %}
-            </ul>
-          </div>
-        <br>
-        <div class="info__subscriptions">
-            <div class="info__headers">
-              <h3>Список банков</h3>
-              <a href="#">See all</a>
-            </div>
-            <ul class="info__creators">
-                {% for b in banks %}
-              <li class="info__creator info__creator--active">
-                <div class="info__icon">
-                  <img src="" alt="" />
-                </div>
-                <div class="info__descr">
-                  <h4>{{ b.name}}</h4>
-                  <a href="#">@Oschaf_1</a>
-                </div>
-                <a href="{{ b.get_absolute_url }}" class="info__button info__button--active">Открыть</a>
-              </li>
-                {% endfor %}
-            </ul>
-          </div>
-{% endblock right %}
+{% block cards_rating %}
+{% for cards_rating in last_10_post %}
+    <li class="info__creator info__creator--active">
+        <div class="info__icon">
+            <img src="{{ cards_rating.mini_icons.url}}" alt="" />
+        </div>
+        <div class="info__descr">
+            <h4>{{ cards_rating.name}}</h4>
+        </div>
+        <button class="info__button info__button--active">Подробнее</button>
+    </li>
+{% endfor %}
+{% endblock cards_rating %}
+{% block cardscredit_rating %}
+ {% for cards_rating in post_debet %}
+    <li class="info__creator info__creator--active">
+        <div class="info__icon">
+            <img src="{{ cards_rating.mini_icons.url}}" alt="" />
+        </div>
+        <div class="info__descr">
+            <h4>{{ cards_rating.name}}</h4>
+        </div>
+        <button class="info__button info__button--active">Подробнее</button>
+    </li>
+{% endfor %}
+{% endblock cardscredit_rating %}
+{% block banks_rating %}
+{% for banks_rating in banks %}
+    <li class="info__creator info__creator--active">
+        <div class="info__icon">
+            <img src="{{ banks_rating.mini_icons.url }}" alt="" />
+        </div>
+        <div class="info__descr">
+            <h4>{{ banks_rating.name}}</h4>
+        </div>
+        <button class="info__button info__button--active">Подробнее</button>
+    </li>
+{% endfor %}
+{% endblock banks_rating %}
+
+

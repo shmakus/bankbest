@@ -1,9 +1,16 @@
 from django.contrib import admin
 from .models import *
 from blog.models import *
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django import forms
 # Register your models here.
 
 
+class PostAdminForm(forms.ModelForm):
+    text = forms.CharField(label='Текст', widget=CKEditorUploadingWidget())
+    class Meta:
+        model = Post
+        fields = '__all__'
 
 @admin.register(MainCategory)
 class CategoryAdmin(admin.ModelAdmin):
@@ -44,7 +51,7 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('category', 'bank')
     search_fields = ('name', 'category__name')
     prepopulated_fields = {'slug': ("name",)}
-
+    form = PostAdminForm
 
 class RatingStarAdmin(admin.ModelAdmin):
     list_display = ('id', 'value')

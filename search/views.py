@@ -18,6 +18,8 @@ def search(request):
         subcategories = SubCategory.objects.all()
         posts = Post.objects.all()
         banks = Bank.objects.all()
+        post_ten_last = Post.objects.filter(category=1)[:5]
+        post_debet = Post.objects.filter(category=2)[:5]
 
         context = {
             'query': query,
@@ -27,7 +29,9 @@ def search(request):
             'subcategories': subcategories,
             'posts': posts,
             'banks': banks,
-            'star_form': RatingForm
+            'star_form': RatingForm,
+            'post_ten_last': post_ten_last,
+            'post_debet': post_debet
         }
         return render(request, 'search_results.html', context)
-    return render(request, 'base.html')
+    return render(request, 'new_base2.html')

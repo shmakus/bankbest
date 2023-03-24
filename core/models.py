@@ -2,6 +2,10 @@ from django.db import models
 from django import forms
 from django.urls import reverse
 from django.conf import settings
+from django.utils import timezone
+from meta.models import ModelMeta
+from ckeditor.fields import RichTextField
+
 # Create your models here.
 
 class Profile(models.Model):
@@ -23,7 +27,8 @@ class MainCategory(models.Model):
     icon = models.ImageField("Иконка", null=True)
     title = models.CharField("Seo Title", max_length=80, null=True)
     descriptions = models.CharField("Seo Description", max_length=160, null=True)
-
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -44,7 +49,8 @@ class Category(models.Model):
     icon = models.ImageField("Иконка", null=True)
     title = models.CharField("Seo Title", max_length=80, null=True)
     descriptions = models.CharField("Seo Description", max_length=160, null=True)
-
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -64,6 +70,8 @@ class SubCategory(models.Model):
     icon = models.ImageField("Иконка", null=True)
     title = models.CharField("Seo Title", max_length=80, null=True)
     descriptions = models.CharField("Seo Description", max_length=160, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -82,6 +90,12 @@ class Bank(models.Model):
     slug = models.SlugField(unique=True, null=True)
     title = models.CharField("Seo Title", max_length=80, null=True)
     descriptions = models.CharField("Seo Description", max_length=160, null=True)
+    mini_icons = models.ImageField("Иконка", null=True)
+    img = models.ImageField("Изображение", null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    url_off_site = models.CharField("Офф сайт", max_length=120, null=True)
+
 
     def __str__(self):
         return self.name
@@ -94,7 +108,7 @@ class Bank(models.Model):
         return reverse('bank_detail', kwargs={'bank_slug': self.slug})
 
 
-class Post(models.Model):
+class Post(ModelMeta, models.Model):
     name = models.CharField("Пост", max_length=120)
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, verbose_name="Основная категория", related_name='maincate', null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Категория", related_name='posts', null=True)
@@ -107,12 +121,28 @@ class Post(models.Model):
     titleSeo = models.CharField("Title сео", max_length=80, null=True)
     descriptionSeo = models.CharField("Description Seo", max_length=160, null=True)
     img = models.ImageField("Изображение", null=True)
+    mini_icons = models.ImageField("Иконка", null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    text = RichTextField("Text", null=True)
+
+
+    _metadata = {
+        'title': 'titleSeo',
+        'description': 'descriptionSeo',
+        'image': 'get_meta_image',
+    }
+
+    def get_meta_image(self):
+        if self.img:
+            return self.img.url
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'category_slug': self.category.slug, 'post_slug': self.slug})
+
 
     class Meta:
         verbose_name = "Пост"
@@ -163,3 +193,6 @@ class Reviews(models.Model):
     class Meta:
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
+
+
+
