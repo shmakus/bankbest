@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import DetailView
+
 from .models import MainCategory, Category, SubCategory, Post, Bank, RatingForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views import View
@@ -138,7 +140,7 @@ def bank_detail(request, bank_slug):
     return render(request, 'bank_detail.html', context)
 
 
-def bank_list(request, ):
+def bank_list(request):
     bank = Bank.objects.all()
     maincategorys = MainCategory.objects.all()
     posts = Post.objects.order_by("-id")[0:3]
@@ -156,5 +158,23 @@ def bank_list(request, ):
     return render(request, 'bank_list.html', context)
 
 
-
+def error_page(request, exception):
+    maincategorys = MainCategory.objects.all()
+    categories = Category.objects.all()
+    subcategories = SubCategory.objects.all()
+    posts = Post.objects.all()
+    banks = Bank.objects.all()
+    post_ten_last = Post.objects.filter(category=1)[:5]
+    post_debet = Post.objects.filter(category=2)[:5]
+    context = {
+        'maincategorys': maincategorys,
+        'categories': categories,
+        'subcategories': subcategories,
+        'posts': posts,
+        'banks': banks,
+        'star_form': RatingForm,
+        'last_10_post': post_ten_last,
+        'post_debet': post_debet
+    }
+    return render(request, '404.html', context, status=404)
 

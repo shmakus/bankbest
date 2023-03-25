@@ -5,7 +5,7 @@ from django.conf import settings
 from django.utils import timezone
 from meta.models import ModelMeta
 from ckeditor.fields import RichTextField
-
+from meta.views import Meta
 # Create your models here.
 
 class Profile(models.Model):
@@ -126,16 +126,6 @@ class Post(ModelMeta, models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     text = RichTextField("Text", null=True)
 
-
-    _metadata = {
-        'title': 'titleSeo',
-        'description': 'descriptionSeo',
-        'image': 'get_meta_image',
-    }
-
-    def get_meta_image(self):
-        if self.img:
-            return self.img.url
 
     def __str__(self):
         return self.name

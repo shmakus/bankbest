@@ -5,19 +5,46 @@ from core.models import *
 
 # Create your views here.
 
-def category_detail(request, category_slug, maincategory_slug):
-    category = get_object_or_404(BlogCategory, slug=category_slug)
+def categoryblog_list(request):
+    category = BlogCategory.objects.all()
+    posts = BlogPost.objects.all()
     allmaincategorys = MainCategory.objects.all()
-    maincategorys = get_object_or_404(MainCategory, slug=maincategory_slug, cate__slug=category_slug)
-    subcategories = category.subcategories.all()
-    posts = category.posts.all()
     banks = Bank.objects.all()
     context = {
         'allmain': allmaincategorys,
-        'maincategory': maincategorys,
         'category': category,
-        'subcategories': subcategories,
-        'posts': posts,
+        'banks': banks,
+        'posts': posts
+    }
+    return render(request, 'categoryblog_list.html', context)
+
+
+def categoryblog_detail(request, blogcategory_slug):
+    category = get_object_or_404(BlogCategory, slug=blogcategory_slug)
+    categorys = BlogCategory.objects.all()
+    posts = category.postsblog.all()
+    allmaincategorys = MainCategory.objects.all()
+    banks = Bank.objects.all()
+    context = {
+        'allmain': allmaincategorys,
+        'category': category,
+        'categorys': categorys,
+        'banks': banks,
+        'posts': posts
+    }
+    return render(request, 'categoryblog_detail.html', context)
+
+
+def blogpost_detail(request, blogcategory_slug, postblog_slug):
+    category = BlogCategory.objects.all()
+    blogpost = get_object_or_404(BlogPost, slug=postblog_slug)
+    banks = Bank.objects.all()
+    posts = BlogPost.objects.all()
+    maincategory = MainCategory.objects.all()
+    context = {
+        'maincategorys': maincategory,
+        'category': category,
+        'post': blogpost,
         'banks': banks
     }
-    return render(request, 'category_detail.html', context)
+    return render(request, 'postblog_detail.html', context)

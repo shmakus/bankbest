@@ -1,7 +1,7 @@
 {% extends 'new_base2.html' %}
 {% load static %}
 {% block title %} {{ post.titleSeo }} {% endblock title %}
-{% block description %}{{ post.description }}{% endblock description %}
+{% block description %}{{ post.descriptionSeo }}{% endblock description %}
 
 {% block mobile_menu %}
         {% for mobile_menu in maincategorys %}
@@ -23,7 +23,7 @@
         </li>
     {% endfor %}
 {% endblock desktop_menu %}
-{% block h1 %} {{ post.name }} - лучший выбор на выгодных условиях{% endblock h1 %}
+{% block h1 %} {{ post.name }} - сделай правильный выбор!{% endblock h1 %}
 
 {% block product_cat %}
     {% for prodect_cat in categories %}
@@ -51,7 +51,9 @@
               <div class="product__header">
                 <div class="product__info">
                   <div class="product__img">
+                      <a href="{{ post.link }}">
                     <img src="{{ post.img.url }}" alt="" />
+                      </a>
                   </div>
                   <div class="product__descr">
                     <h3 class="cards__title">{{ post.name }}</h3>
@@ -114,9 +116,9 @@
                         </svg>
                       </div>
                     </div>
-                    <p class="product__text">
-                        {{ post.description }}
-                    </p>
+                    <div class="product__text">
+                        {{ post.description|safe }}
+                    </div>
                   </div>
                 </div>
                 <div class="product__buttons cards__buttons">
@@ -137,56 +139,39 @@
               <a data-toggle="review" href="#" class="cards__button reviews__add">Оставить отзыв</a>
             </div>
 
-            <ul class="reviews__list">
-              <li class="reviews__item">
-                <div class="reviews__header">
-                  <div class="reviews__user-block">
-                    <img src="" alt="" />
-                    <div class="reviews__user-info">
-                      <h4>Sakaw_332</h4>
-                      <p>16.11.2022 10:31</p>
-                    </div>
-                  </div>
-                  <div class="reviews__rating">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M10.2976 2.63251L11.6176 5.27251C11.7976 5.64001 12.2776 5.99251 12.6826 6.06001L15.0751 6.45751C16.6051 6.71251 16.9651 7.82251 15.8626 8.91751L14.0026 10.7775C13.6876 11.0925 13.5151 11.7 13.6126 12.135L14.1451 14.4375C14.5651 16.26 13.5976 16.965 11.9851 16.0125L9.74255 14.685C9.33755 14.445 8.67005 14.445 8.25755 14.685L6.01505 16.0125C4.41005 16.965 3.43505 16.2525 3.85505 14.4375L4.38755 12.135C4.48505 11.7 4.31255 11.0925 3.99755 10.7775L2.13755 8.91751C1.04255 7.82251 1.39505 6.71251 2.92505 6.45751L5.31755 6.06001C5.71505 5.99251 6.19505 5.64001 6.37505 5.27251L7.69505 2.63251C8.41505 1.20001 9.58505 1.20001 10.2976 2.63251V2.63251Z"
-                        stroke="#54C860"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    <span>4,8</span>
-                  </div>
-                </div>
-                <h3 class="reviews__subtitle reviews__subtitle--item">Все понравился, честно, не вру</h3>
-                <p class="reviews__descr">
-                  Являясь всего лишь частью общей картины, ключевые особенности структуры проекта являются только методом политического участия и
-                  функционально разнесены на независимые элементы. Каждый из нас понимает очевидную вещь: высококачественный прототип будущего проекта
-                  выявляет срочную потребность кластеризации усилий.
-                </p>
-              </li>
-            </ul>
-            <a href="#" class="reviews__more cards__button">Загрузить больше</a>
-            <a href="#" class="reviews__hide cards__button">Скрыть</a>
+
+
           </div>
 {% endblock rewrite %}
-{% block cards_rating %}
-{% for cards_rating in last_10_post %}
-    <li class="info__creator info__creator--active">
-        <div class="info__icon">
-            <img src="{{ cards_rating.mini_icons.url}}" alt="" />
-        </div>
-        <div class="info__descr">
-            <h4>{{ cards_rating.name}}</h4>
-        </div>
-        <button class="info__button info__button--active">Подробнее</button>
-    </li>
-{% endfor %}
-{% endblock cards_rating %}
 
+{% block cards_rating %}
+     <div class="info__subscriptions">
+            <div class="info__headers">
+              <h3>Рейтинг дебетовых карт</h3>
+              <a href="/bankovskie-karty/cat/debetovye-karty/">Все</a>
+            </div>
+            <ul class="info__creators">
+        {% for cards_rating in last_10_post %}
+        <li class="info__creator info__creator--active">
+            <div class="info__icon">
+                <img src="{{ cards_rating.mini_icons.url}}" alt="" />
+            </div>
+            <div class="info__descr">
+                <h4>{{ cards_rating.name}}</h4>
+            </div>
+      <a href="{{ cards_rating.get_absolute_url }}" class="info__button info__button--active cards__button">Подробнее</a>
+        </li>
+{% endfor %}
+     </ul>
+          </div>
+{% endblock cards_rating %}
 {% block cardscredit_rating %}
+     <div class="info__subscriptions">
+            <div class="info__headers">
+              <h3>Рейтинг кредитных карт</h3>
+              <a href="/bankovskie-karty/cat/kreditnye-karty/">Все</a>
+            </div>
+            <ul class="info__creators">
  {% for cards_rating in post_debet %}
     <li class="info__creator info__creator--active">
         <div class="info__icon">
@@ -195,11 +180,19 @@
         <div class="info__descr">
             <h4>{{ cards_rating.name}}</h4>
         </div>
-        <button class="info__button info__button--active">Подробнее</button>
+      <a href="{{ cards_rating.get_absolute_url }}" class="info__button info__button--active cards__button">Подробнее</a>
     </li>
 {% endfor %}
+     </ul>
+          </div>
 {% endblock cardscredit_rating %}
 {% block banks_rating %}
+     <div class="info__subscriptions">
+            <div class="info__headers">
+              <h3>Рейтинг банков 2023</h3>
+              <a href="/banks/">Все</a>
+            </div>
+            <ul class="info__creators">
 {% for banks_rating in banks %}
     <li class="info__creator info__creator--active">
         <div class="info__icon">
@@ -208,9 +201,11 @@
         <div class="info__descr">
             <h4>{{ banks_rating.name}}</h4>
         </div>
-        <button class="info__button info__button--active">Подробнее</button>
+      <a href="{{ banks_rating.get_absolute_url }}" class="info__button info__button--active cards__button">Подробнее</a>
     </li>
 {% endfor %}
+     </ul>
+          </div>
 {% endblock banks_rating %}
 
 

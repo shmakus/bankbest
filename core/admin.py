@@ -8,6 +8,7 @@ from django import forms
 
 class PostAdminForm(forms.ModelForm):
     text = forms.CharField(label='Текст', widget=CKEditorUploadingWidget())
+    description = forms.CharField(label='Описание', widget=CKEditorUploadingWidget())
     class Meta:
         model = Post
         fields = '__all__'

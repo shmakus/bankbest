@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+
 const darkButton = document.querySelector('.info__theme--dark');
 const lightButton = document.querySelector('.info__theme--light');
 
@@ -191,3 +192,4 @@ if (darkMode === 'enabled') {
   enableDarkMode(); // set state of darkMode on page load
   enableDarkModeMobile();
 }
+

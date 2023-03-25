@@ -1,7 +1,7 @@
 {% extends 'new_base2.html' %}
 {% load static %}
 {% block title %} {{ category.title }} {% endblock title %}
-{% block description %}{{ category.description }}{% endblock description %}
+{% block description %}{{ category.descriptions }}{% endblock description %}
 
 {% block mobile_menu %}
         {% for mobile_menu in allmain %}
@@ -45,7 +45,9 @@
     {% for post in posts %}
   <li class="cards__card">
     <div class="cards__picture">
+        <a href="{{ post.link }}">
         <img src="{{ post.img.url }}" alt="" />
+        </a>
     </div>
    <h3 class="cards__title">{{ post.name }}</h3>
     <div class="cards__reactions">
@@ -112,7 +114,7 @@
       <a href="{{ post.link }}" class="cards__button">Оформить</a>
       <a href="{{ post.get_absolute_url }}" class="cards__button cards__button--second">Подробнее</a>
     </div>
-    <p class="cards__descr">{{ post.description }}</p>
+    <div class="cards__descr">{{ post.description|safe }}</div>
   </li>
     {% endfor %}
     </ul>
@@ -120,19 +122,33 @@
 {% endblock cards_product %}
 
 {% block cards_rating %}
-{% for cards_rating in last_10_post %}
-    <li class="info__creator info__creator--active">
-        <div class="info__icon">
-            <img src="{{ cards_rating.mini_icons.url}}" alt="" />
-        </div>
-        <div class="info__descr">
-            <h4>{{ cards_rating.name}}</h4>
-        </div>
-        <button class="info__button info__button--active">Подробнее</button>
-    </li>
+     <div class="info__subscriptions">
+            <div class="info__headers">
+              <h3>Рейтинг дебетовых карт</h3>
+              <a href="/bankovskie-karty/cat/debetovye-karty/">Все</a>
+            </div>
+            <ul class="info__creators">
+        {% for cards_rating in last_10_post %}
+        <li class="info__creator info__creator--active">
+            <div class="info__icon">
+                <img src="{{ cards_rating.mini_icons.url}}" alt="" />
+            </div>
+            <div class="info__descr">
+                <h4>{{ cards_rating.name}}</h4>
+            </div>
+      <a href="{{ cards_rating.get_absolute_url }}" class="info__button info__button--active cards__button">Подробнее</a>
+        </li>
 {% endfor %}
+     </ul>
+          </div>
 {% endblock cards_rating %}
 {% block cardscredit_rating %}
+     <div class="info__subscriptions">
+            <div class="info__headers">
+              <h3>Рейтинг кредитных карт</h3>
+              <a href="/bankovskie-karty/cat/kreditnye-karty/">Все</a>
+            </div>
+            <ul class="info__creators">
  {% for cards_rating in post_debet %}
     <li class="info__creator info__creator--active">
         <div class="info__icon">
@@ -141,11 +157,19 @@
         <div class="info__descr">
             <h4>{{ cards_rating.name}}</h4>
         </div>
-        <button class="info__button info__button--active">Подробнее</button>
+      <a href="{{ cards_rating.get_absolute_url }}" class="info__button info__button--active cards__button">Подробнее</a>
     </li>
 {% endfor %}
+     </ul>
+          </div>
 {% endblock cardscredit_rating %}
 {% block banks_rating %}
+     <div class="info__subscriptions">
+            <div class="info__headers">
+              <h3>Рейтинг банков 2023</h3>
+              <a href="/banks/">Все</a>
+            </div>
+            <ul class="info__creators">
 {% for banks_rating in banks %}
     <li class="info__creator info__creator--active">
         <div class="info__icon">
@@ -154,7 +178,9 @@
         <div class="info__descr">
             <h4>{{ banks_rating.name}}</h4>
         </div>
-        <button class="info__button info__button--active">Подробнее</button>
+      <a href="{{ banks_rating.get_absolute_url }}" class="info__button info__button--active cards__button">Подробнее</a>
     </li>
 {% endfor %}
+     </ul>
+          </div>
 {% endblock banks_rating %}

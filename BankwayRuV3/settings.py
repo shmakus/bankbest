@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-o@!2gl+c$4lf_^yox%4_+5!3hddjk_1+f1rr+$tmz1r*2w&t6f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'search',
     'blog',
     'django.contrib.sitemaps',
-    'meta',
     'ckeditor',
     'ckeditor_uploader',
     'allauth',
@@ -194,3 +193,4 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LOGIN_REDIRECT_URL = '/'
+
