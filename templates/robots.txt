@@ -1,6 +1,8 @@
 User-Agent: *
 Disallow: /admin/
 Disallow: /blog/
-
+Disallow: /?p*
+Disallow: /?page_id*
+Disallow: /?*
 # Sitemap files
 Sitemap: https://bankbest.ru/sitemap.xml

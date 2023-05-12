@@ -24,7 +24,10 @@
     {% endfor %}
 {% endblock desktop_menu %}
 {% block h1 %} Обзор банков России 2023 года {% endblock h1 %}
-
+{% block h2 %}<div class="content__discover">
+            <h2>Рейтинг и отзывы о самых выгодных банков России в 2023 году.</h2>
+          </div>
+ {% endblock h2 %}
 
 {% block cards_product %}
     <div class="content__cards">
@@ -33,7 +36,7 @@
   <li class="cards__card">
     <div class="cards__picture">
         <a href="{{ post.get_absolute_url }}">
-        <img src="{{ post.img.url }}" alt="" />
+        <img src="{{ post.img.url }}" alt="{{ post.name }}" />
         </a>
     </div>
    <h3 class="cards__title">{{ post.name }}</h3>
@@ -101,7 +104,7 @@
       <a href="{{ post.get_absolute_url }}" class="cards__button">Обзор</a>
       <a href="{{ post.get_absolute_url }}#reviews" class="cards__button cards__button--second">Отзывы</a>
     </div>
-    <p class="cards__descr">{{ post.description }}</p>
+    <div class="cards__descr">{{ post.description|safe }}</div>
   </li>
     {% endfor %}
     </ul>
@@ -117,7 +120,7 @@
         {% for cards_rating in last_10_post %}
         <li class="info__creator info__creator--active">
             <div class="info__icon">
-                <img src="{{ cards_rating.mini_icons.url}}" alt="" />
+                <img src="{{ cards_rating.mini_icons.url}}" alt="{{ cards_rating.name }}" />
             </div>
             <div class="info__descr">
                 <h4>{{ cards_rating.name}}</h4>
@@ -138,7 +141,7 @@
  {% for cards_rating in post_debet %}
     <li class="info__creator info__creator--active">
         <div class="info__icon">
-            <img src="{{ cards_rating.mini_icons.url}}" alt="" />
+            <img src="{{ cards_rating.mini_icons.url}}" alt="{{ cards_rating.name }}" />
         </div>
         <div class="info__descr">
             <h4>{{ cards_rating.name}}</h4>
@@ -159,7 +162,7 @@
 {% for banks_rating in banks %}
     <li class="info__creator info__creator--active">
         <div class="info__icon">
-            <img src="{{ banks_rating.mini_icons.url }}" alt="" />
+            <img src="{{ banks_rating.mini_icons.url }}" alt="{{ banks_rating.name }}" />
         </div>
         <div class="info__descr">
             <h4>{{ banks_rating.name}}</h4>

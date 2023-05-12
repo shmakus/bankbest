@@ -1,0 +1,151 @@
+{% extends 'new_base2.html' %}
+{% load static %}
+{% block title %} Журнал {% endblock title %}
+{% block description %}Журнал описание{% endblock description %}
+
+{% block mobile_menu %}
+        {% for mobile_menu in allmain %}
+          <li class="popup__nav-item">
+            <a href="{{ mobile_menu.get_absolute_url }}">
+              <span>{{ mobile_menu.name }}</span>
+            </a>
+          </li>
+        {% endfor %}
+
+{% endblock mobile_menu %}
+
+{% block desktop_menu %}
+    {% for main in allmain %}
+        <li class="aside__item aside__item--active">
+        <a href="{{ main.get_absolute_url }}">
+        <span>{{ main.name }}</span>
+        </a>
+        </li>
+    {% endfor %}
+{% endblock desktop_menu %}
+{% block h1 %} Журнал {% endblock h1 %}
+
+{% block product_cat %}
+    {% for prodect_cat in subcategories %}
+        <li class="content__tag content__tag--fire">
+    <a href="{{ prodect_cat.get_absolute_url }}">
+          <div class="content__icon">
+            <img src="{{ prodect_cat.icon.url }}" 
+alt="{{ prodect_cat.name }}" />
+          </div>
+    <span>{{ prodect_cat.name }}</span>
+    </a>
+        </li>
+    {% endfor %}
+{% endblock product_cat %}
+
+
+{% block cards_product %}
+    <div class="content__cards">
+    <ul class="cards">
+    {% for post in posts %}
+  <li class="cards__card">
+    <div class="cards__picture">
+        <a href="{{ post.get_absolute_url }}">
+        <img src="{{ post.img.url }}" alt="" />
+        </a>
+    </div>
+   <h3 class="cards__title">{{ post.name }}</h3>
+    <div class="cards__reactions">
+      <div class="cards__ratings">
+        <div class="cards__star-button">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M10.2976 2.63251L11.6176 5.27251C11.7976 5.64001 12.2776 5.99251 12.6826 6.06001L15.0751 6.45751C16.6051 6.71251 16.9651 7.82251 15.8626 8.91751L14.0026 10.7775C13.6876 11.0925 13.5151 11.7 13.6126 12.135L14.1451 14.4375C14.5651 16.26 13.5976 16.965 11.9851 16.0125L9.74255 14.685C9.33755 14.445 8.67005 14.445 8.25755 14.685L6.01505 16.0125C4.41005 16.965 3.43505 16.2525 3.85505 14.4375L4.38755 12.135C4.48505 11.7 4.31255 11.0925 3.99755 10.7775L2.13755 8.91751C1.04255 7.82251 1.39505 6.71251 2.92505 6.45751L5.31755 6.06001C5.71505 5.99251 6.19505 5.64001 6.37505 5.27251L7.69505 2.63251C8.41505 1.20001 9.58505 1.20001 10.2976 2.63251V2.63251Z"
+              stroke="#54C860"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+          <div class="rating" data-total-value="0">
+
+                    </div>
+      </div>
+      <div class="cards__rate">
+        <span>4.8</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_2_2914)">
+            <path d="M8.09998 11V12.4" stroke="#8C8D9A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M4.7666 14.6667H11.4333V14C11.4333 13.2667 10.8333 12.6667 10.0999 12.6667H6.09993C5.3666 12.6667 4.7666 13.2667 4.7666 14V14.6667V14.6667Z"
+              stroke="#8C8D9A"
+              stroke-width="1.2"
+              stroke-miterlimit="10"
+            />
+            <path d="M4.09998 14.6667H12.1" stroke="#8C8D9A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M8.00004 10.6667C5.42004 10.6667 3.33337 8.58001 3.33337 6.00001V4.00001C3.33337 2.52668 4.52671 1.33334 6.00004 1.33334H10C11.4734 1.33334 12.6667 2.52668 12.6667 4.00001V6.00001C12.6667 8.58001 10.58 10.6667 8.00004 10.6667Z"
+              stroke="#8C8D9A"
+              stroke-width="1.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M3.64665 7.76669C3.14665 7.60669 2.70665 7.31336 2.35999 6.96669C1.75999 6.30002 1.35999 5.50002 1.35999 4.56669C1.35999 3.63336 2.09332 2.90002 3.02665 2.90002H3.45999C3.32665 3.20669 3.25999 3.54669 3.25999 3.90002V5.90002C3.25999 6.56669 3.39999 7.19336 3.64665 7.76669V7.76669Z"
+              stroke="#8C8D9A"
+              stroke-width="1.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M12.3533 7.76669C12.8533 7.60669 13.2933 7.31336 13.6399 6.96669C14.2399 6.30002 14.6399 5.50002 14.6399 4.56669C14.6399 3.63336 13.9066 2.90002 12.9733 2.90002H12.5399C12.6733 3.20669 12.7399 3.54669 12.7399 3.90002V5.90002C12.7399 6.56669 12.5999 7.19336 12.3533 7.76669V7.76669Z"
+              stroke="#8C8D9A"
+              stroke-width="1.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_2_2914">
+              <rect width="16" height="16" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+    </div>
+    <div class="cards__buttons">
+       <a href="{{ post.get_absolute_url }}" class="cards__button">Подробнее</a>
+      <a href="{{ post.get_absolute_url }}#reviews" class="cards__button cards__button--second">Комментарии</a>
+    </div>
+    <p class="cards__descr">{{ post.desciptions }}</p>
+  </li>
+    {% endfor %}
+    </ul>
+          </div>
+{% endblock cards_product %}
+{% block cards_rating %}
+     <div class="info__subscriptions">
+            <div class="info__headers">
+              <h3>Категории</h3>
+            </div>
+            <ul class="info__creators">
+{% for cards_rating in category %}
+    <li class="info__creator info__creator--active">
+        <div class="info__icon">
+            <img src="{{ cards_rating.icons.url}}" alt="" />
+        </div>
+        <div class="info__descr">
+            <h4>{{ cards_rating.name}}</h4>
+        </div>
+      <a href="{{ cards_rating.get_absolute_url }}" class="info__button info__button--active cards__button">Подробнее</a>
+
+    </li>
+
+{% endfor %}
+     </ul>
+          </div>
+{% endblock cards_rating %}
+
+{% block cardscredit_rating %}
+
+{% endblock cardscredit_rating %}
+{% block banks_rating %}
+
+{% endblock banks_rating %}

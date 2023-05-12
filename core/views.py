@@ -9,7 +9,8 @@ def home(request):
     maincategorys = MainCategory.objects.all()
     categories = Category.objects.all()
     subcategories = SubCategory.objects.all()
-    posts = Post.objects.all()
+    posts = Post.objects.all()[:10]
+    postss = Post.objects.all()
     banks = Bank.objects.all()
     post_ten_last = Post.objects.filter(category=1)[:5]
     post_debet = Post.objects.filter(category=2)[:5]
@@ -18,6 +19,7 @@ def home(request):
         'categories': categories,
         'subcategories': subcategories,
         'posts': posts,
+	'postss': postss,
         'banks': banks,
         'star_form': RatingForm,
         'last_10_post': post_ten_last,

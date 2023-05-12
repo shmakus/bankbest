@@ -13,6 +13,16 @@ class PostAdminForm(forms.ModelForm):
         model = Post
         fields = '__all__'
 
+
+class BankAdminForm(forms.ModelForm):
+    text = forms.CharField(label='Текст', widget=CKEditorUploadingWidget())
+    description = forms.CharField(label='Описание', widget=CKEditorUploadingWidget())
+    class Meta:
+        model = Bank
+        fields = '__all__'
+
+
+
 @admin.register(MainCategory)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'slug')
@@ -44,6 +54,8 @@ class BankAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     list_display_links = ('id', 'name')
     prepopulated_fields = {'slug': ("name",)}
+    form = BankAdminForm
+
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):

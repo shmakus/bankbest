@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <link rel="preload" href="{% static 'css/icons/bg.svg' %}" as="image">
     <title>{% block title %}{% endblock title %}</title>
     <meta name="description" content="{% block description %}{% endblock description %}">
     <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-icon-57x57.png' %}">
@@ -25,6 +26,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{% static 'favicon/ms-icon-144x144.png' %}">
     <meta name="theme-color" content="#ffffff">
+    <meta name="zen-verification" content="nBFqosrf3WBjD4ZkNVfoAPGcNJxX7T5ILVCoR1tHssGprbV3I2nZA0NMDWZeFATf" />
   </head>
 
   <body class="guest">
@@ -200,13 +202,9 @@
 
          <div class="content__filter">
             <div class="content__info">
+		<h1>{% block h1 %}{% endblock h1 %}</h1>
             </div>
-         <div class="content__discover">
-
-            <h2>{% block h1 %}{% endblock h1 %}
-
-            </h2>
-          </div>
+		{% block h2 %}{% endblock h2 %}
             <ul class="content__tags">
                 {% block product_cat %}
 
@@ -306,7 +304,7 @@
                 </svg>
                 <span>Авторизация</span>
               </a>
-              <a data-toggle="registration" href="линк на регистрацию" class="info__item">
+              <a data-toggle="registration" href="/" class="info__item">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     fill-rule="evenodd"
@@ -414,5 +412,19 @@
     <script src="{% static 'js/modals.js' %}"></script>
     <script src="{% static 'js/card.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-  </body>
+    <!-- Yandex.Metrika counter -->
+<noscript><div><img src="https://mc.yandex.ru/watch/92794635" style="position:absolute; left:-9999px;" alt="yandex" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+<!--LiveInternet counter--><a href="https://www.liveinternet.ru/click"
+target="_blank"><img id="licntE01D" width="88" height="15" style="border:0" 
+title="LiveInternet: показано число посетителей за сегодня"
+src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+alt=""/></a><script>(function(d,s){d.getElementById("licntE01D").src=
+"https://counter.yadro.ru/hit?t26.6;r"+escape(d.referrer)+
+((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+(s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+";h"+escape(d.title.substring(0,150))+";"+Math.random()})
+(document,screen)</script><!--/LiveInternet-->
+ 
+ </body>
 </html>

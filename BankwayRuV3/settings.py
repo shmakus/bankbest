@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o@!2gl+c$4lf_^yox%4_+5!3hddjk_1+f1rr+$tmz1r*2w&t6f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['bankbest.ru', 'www.bankbest.ru', 'localhost']
 
 
 # Application definition
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'core',
-    'graphene_django',
     'search',
     'blog',
     'django.contrib.sitemaps',
@@ -90,22 +89,24 @@ WSGI_APPLICATION = 'BankwayRuV3.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'bank',
-#         'USER': 'warlock',
-#         'PASSWORD': 'password',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bankbest1337',
+        'USER': 'warlock1337',
+        'PASSWORD': '1337pa$$88d33ptownl0v3',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -142,9 +143,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [STATIC_DIR]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 
 MEDIA_URL = 'media/'
@@ -159,9 +158,6 @@ GRAPHENE = {
     "SCHEMA": "core.schema.schema"
 }
 
-META_USE_OG_PROPERTIES = True
-META_USE_TITLE_TAG = True
-META_OG_NAMESPACES =True
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 

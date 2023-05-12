@@ -35,7 +35,7 @@
   <li class="cards__card">
     <div class="cards__picture">
                 <a href="{{ post.link }}">
-      <img src="{{ post.img.url }}" alt="" />
+      <img src="{{ post.img.url }}" alt="{{ post.name }}" />
                 </a>
     </div>
     <h3 class="cards__title">{{ post.name }}</h3>
@@ -95,13 +95,13 @@
           </defs>
         </svg>
       </div>
-      <a href="#" class="cards__reviews">Reviews (15)</a>
+      <a href="{{ post.get_absolute_url }}#reviews" class="cards__reviews">Отзывы</a>
     </div>
     <div class="cards__buttons">
-      <a href="{{ post.link }}" class="cards__button">Button Text</a>
-      <a href="{{ post.get_absolute_url }}" class="cards__button cards__button--second">Button Text</a>
+      <a href="{{ post.link }}" class="cards__button">Оформить</a>
+      <a href="{{ post.get_absolute_url }}" class="cards__button cards__button--second">Подробнее</a>
     </div>
-    <p class="cards__descr">{{ post.description }}</p>
+    <div class="cards__descr">{{ post.description|safe }}</div>
   </li>
     {% empty %}
     <li>No results found.</li>
@@ -125,7 +125,7 @@
         {% for cards_rating in post_ten_last %}
         <li class="info__creator info__creator--active">
             <div class="info__icon">
-                <img src="{{ cards_rating.mini_icons.url}}" alt="" />
+                <img src="{{ cards_rating.mini_icons.url}}" alt="{{ post.name }}" />
             </div>
             <div class="info__descr">
                 <h4>{{ cards_rating.name}}</h4>
@@ -146,7 +146,7 @@
  {% for cards_rating in post_debet %}
     <li class="info__creator info__creator--active">
         <div class="info__icon">
-            <img src="{{ cards_rating.mini_icons.url}}" alt="" />
+            <img src="{{ cards_rating.mini_icons.url}}" alt="{{ cards_rating.name}}" />
         </div>
         <div class="info__descr">
             <h4>{{ cards_rating.name}}</h4>
@@ -167,7 +167,7 @@
 {% for banks_rating in banks %}
     <li class="info__creator info__creator--active">
         <div class="info__icon">
-            <img src="{{ banks_rating.mini_icons.url }}" alt="" />
+            <img src="{{ banks_rating.mini_icons.url }}" alt="{{ banks_rating.name }}" />
         </div>
         <div class="info__descr">
             <h4>{{ banks_rating.name}}</h4>

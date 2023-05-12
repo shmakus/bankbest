@@ -3,9 +3,7 @@ from django import forms
 from django.urls import reverse
 from django.conf import settings
 from django.utils import timezone
-from meta.models import ModelMeta
 from ckeditor.fields import RichTextField
-from meta.views import Meta
 # Create your models here.
 
 class Profile(models.Model):
@@ -95,7 +93,7 @@ class Bank(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     url_off_site = models.CharField("Офф сайт", max_length=120, null=True)
-
+    text = RichTextField("Text", null=True)
 
     def __str__(self):
         return self.name
@@ -108,7 +106,7 @@ class Bank(models.Model):
         return reverse('bank_detail', kwargs={'bank_slug': self.slug})
 
 
-class Post(ModelMeta, models.Model):
+class Post(models.Model):
     name = models.CharField("Пост", max_length=120)
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, verbose_name="Основная категория", related_name='maincate', null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Категория", related_name='posts', null=True)

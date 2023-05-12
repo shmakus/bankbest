@@ -23,14 +23,18 @@
         </li>
     {% endfor %}
 {% endblock desktop_menu %}
-{% block h1 %} Журнал {% endblock h1 %}
+{% block h1 %} Журнал про банковские карты, кредиты и ипотеки. Обзор и рейтинг лучших предложений. {% endblock h1 %}
+{% block h2 %}<div class="content__discover">
+            <h2>Добро пожаловать в наш журнал о банковских продуктах! Мы предоставляем обзоры и сравнения банковских карт, кредитов, ипотек и других финансовых продуктов. Здесь вы найдете самые актуальные и полезные советы по выбору и использованию банковских услуг.</h2>
+          </div>
+ {% endblock h2 %}
 
 {% block product_cat %}
     {% for prodect_cat in subcategories %}
         <li class="content__tag content__tag--fire">
     <a href="{{ prodect_cat.get_absolute_url }}">
           <div class="content__icon">
-            <img src="{{ prodect_cat.icon.url }}" alt="" />
+            <img src="{{ prodect_cat.icon.url }}" alt="{{ prodect_cat.name }}" />
           </div>
     <span>{{ prodect_cat.name }}</span>
     </a>
@@ -46,7 +50,7 @@
   <li class="cards__card">
     <div class="cards__picture">
         <a href="{{ post.get_absolute_url }}">
-        <img src="{{ post.img.url }}" alt="" />
+        <img src="{{ post.img.url }}" alt="{{ post.name }}" />
         </a>
     </div>
    <h3 class="cards__title">{{ post.name }}</h3>
@@ -128,7 +132,7 @@
 {% for cards_rating in category %}
     <li class="info__creator info__creator--active">
         <div class="info__icon">
-            <img src="{{ cards_rating.icons.url}}" alt="" />
+            <img src="{{ cards_rating.icons.url}}" alt="{{ cards_rating.name}}" />
         </div>
         <div class="info__descr">
             <h4>{{ cards_rating.name}}</h4>

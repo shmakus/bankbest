@@ -30,7 +30,7 @@
         <li class="content__tag content__tag--fire">
     <a href="{{ prodect_cat.get_absolute_url }}">
           <div class="content__icon">
-            <img src="{{ prodect_cat.icon.url }}" alt="" />
+            <img src="{{ prodect_cat.icon.url }}" alt="{{ prodect_cat.name }}" />
           </div>
     <span>{{ prodect_cat.name }}</span>
     </a>
@@ -47,7 +47,7 @@
   <li class="cards__card">
     <div class="cards__picture">
         <a href="{{ post.get_absolute_url }}">
-        <img src="{{ post.img.url }}" alt="" />
+        <img src="{{ post.img.url }}" alt="{{ post.name }}" />
         </a>
     </div>
    <h3 class="cards__title">{{ post.name }}</h3>
@@ -131,7 +131,7 @@
 {% for cards_rating in categorys %}
     <li class="info__creator info__creator--active">
         <div class="info__icon">
-            <img src="{{ cards_rating.icons.url}}" alt="" />
+            <img src="{{ cards_rating.icons.url}}" alt="{{ cards_rating.name }}" />
         </div>
         <div class="info__descr">
             <h4>{{ cards_rating.name}}</h4>
