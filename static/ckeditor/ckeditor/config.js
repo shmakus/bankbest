@@ -7,4 +7,12 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
+        config.extraPlugins = 'toc';
+        config.toc = {
+        title: 'Table of Contents',
+        scope: 3,
+        listType: 'ul',
+        formatSelector: 'h1,h2,h3,h4,h5,h6',
+    };
+
 };

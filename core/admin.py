@@ -22,18 +22,38 @@ class BankAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
+class CategoryAdminForm(forms.ModelForm):
+    description = forms.CharField(label='Описание', widget=CKEditorUploadingWidget())
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+class MainCategoryAdminForm(forms.ModelForm):
+    description = forms.CharField(label='Описание', widget=CKEditorUploadingWidget())
+    class Meta:
+        model = MainCategory
+        fields = '__all__'
+
+class SubCategoryAdminForm(forms.ModelForm):
+    description = forms.CharField(label='Описание', widget=CKEditorUploadingWidget())
+    class Meta:
+        model = SubCategory
+        fields = '__all__'
+
 
 @admin.register(MainCategory)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'slug')
     list_display_links = ('id', 'name')
     prepopulated_fields = {'slug': ("name",)}
+    form = MainCategoryAdminForm
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'slug', 'maincategory')
     list_display_links = ('id', 'name')
     prepopulated_fields = {'slug': ("name",)}
+    form = CategoryAdminForm
 
 
 @admin.register(SubCategory)
@@ -41,7 +61,7 @@ class SubCategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'slug', 'category')
     list_display_links = ('id', 'name')
     prepopulated_fields = {'slug': ("name",)}
-
+    form = SubCategoryAdminForm
 
 class ReviewInline(admin.TabularInline):
     model = Reviews

@@ -110,7 +110,7 @@ class Post(models.Model):
     name = models.CharField("Пост", max_length=120)
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, verbose_name="Основная категория", related_name='maincate', null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Категория", related_name='posts', null=True)
-    subcategories = models.ManyToManyField(SubCategory, related_name='posts')
+    subcategories = models.ManyToManyField(SubCategory, related_name='posts', null=True, blank=True)
     description = models.TextField("Описание")
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE, verbose_name="Банк", related_name='posts', null=True)
     otziv = models.TextField("Отзывы")

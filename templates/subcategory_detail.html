@@ -24,9 +24,7 @@
     {% endfor %}
 {% endblock desktop_menu %}
 {% block h1 %} {{ subcategory.name }} {% endblock h1 %}
-{% block h2 %}<div class="content__discover">
-            <h2>{{ subcategory.description }}</h2>
-          </div>
+{% block h2 %}
  {% endblock h2 %}
 {% block product_cat %}
     {% for prodect_cat in subcategories %}
@@ -125,6 +123,11 @@
     {% endfor %}
     </ul>
           </div>
+<div style="margin-top: 16px"  class="reviews__call">
+         <div class="product__text">
+                        {{ subcategory.description|safe }}
+                    </div>
+         </div>
 {% endblock cards_product %}
 
 {% block cards_rating %}

@@ -83,15 +83,13 @@ def post_detail(request, category_slug, post_slug):
     banks = Bank.objects.all()
     post_ten_last = Post.objects.filter(category=1)[:5]
     post_debet = Post.objects.filter(category=2)[:5]
-    post_all_category = post.category
-    related_post = Post.objects.filter(category=post_all_category)[:4]
+    posts_category_all = post.ca
 
     context = {
         'maincategorys': maincategorys,
         'categories': categories,
         'subcategories': subcategories,
         'post': post,
-        'all_posts': related_post,
         'banks': banks,
         'star_form': RatingForm,
         'last_10_post': post_ten_last,
